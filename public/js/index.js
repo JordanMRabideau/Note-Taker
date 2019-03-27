@@ -1,7 +1,1 @@
-$(function() {
-    $.ajax("/", {
-        type: "POST"
-    }).then(function() {
-        console.log("Scraped")
-    })
-})
+// Grab the articles as a json
