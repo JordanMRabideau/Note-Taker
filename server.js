@@ -15,6 +15,8 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));

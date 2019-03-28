@@ -5,9 +5,9 @@ var db = require("../models");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-router.get("/", function(req, res) {
-    res.render("index")
-})
+// router.get("/", function(req, res) {
+//     res.render("index")
+// })
 
 router.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
@@ -55,7 +55,7 @@ router.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-router.get("/articles", function(req, res) {
+router.get("/", function(req, res) {
   // Grab every document in the Articles collection
   db.Article.find({})
     .then(function(dbArticle) {
