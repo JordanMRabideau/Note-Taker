@@ -1,9 +1,7 @@
 var express = require("express");
 var mongoose = require("mongoose");
+var path = require("path");
 
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
 
@@ -15,7 +13,8 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static content for the app from the "public" directory in the application directory.
+app.use("/public", express.static(__dirname + "/public"));
 
 var exphbs = require("express-handlebars");
 
