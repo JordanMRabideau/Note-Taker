@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-var db = require("../models");
+var db = require("/../models");
 
 const axios = require("axios");
 const cheerio = require("cheerio");
