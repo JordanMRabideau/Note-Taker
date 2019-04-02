@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     const showNotes = (articleId) => {
         $("#new-note").val("")
-        console.log(articleId)
+        // console.log(articleId)
         $(".note-container").empty();
         $.ajax({
             method: "GET",
@@ -12,6 +12,10 @@ $(document).ready(function() {
             for (let i in data.note) {
                 let note = $("<li class='list-group-item'>");
                 note.text(data.note[i].body);
+                let deleteButton = $("<button class='btn btn-danger float-right deleteNote'>");
+                deleteButton.text("Delete");
+                deleteButton.attr('data-id', data.note[i]._id);
+                note.append(deleteButton);
                 $(".note-container").append(note);
             }
         })
@@ -25,10 +29,19 @@ $(document).ready(function() {
             url: "/articles/" + articleId
         })
           .then(function(data) {
-            console.log("deleted")
-            console.log(data)
+            // console.log("deleted")
+            // console.log(data)
 
-            // location.reload();
+            location.reload();
+        })
+    }
+
+    const deleteNote = (noteId) => {
+        $.ajax({
+            method: "DELETE",
+            url: "/notes/" + noteId
+        }).then(function(response) {
+            console.log(response);
         })
     }
 
@@ -53,7 +66,6 @@ $(document).ready(function() {
         })
     }
 
-    // Grab the articles as a json
     $(".notes").click(function() {
         const articleId = $(this).attr("data-id");
         showNotes(articleId);
@@ -64,11 +76,18 @@ $(document).ready(function() {
     $(".addNote").click(function () {
         const articleId = $(this).attr("data-id");
         addNote(articleId)
+        $("#notes-modal").modal("hide")
     });
    
     $(".delete").click(function() {
         const articleId = $(this).attr("data-id");
         deleteArticle(articleId);
+    })
+
+    $("body").on('click', "button.deleteNote", function() {
+        const noteId = $(this).attr("data-id")
+        deleteNote(noteId);
+        $("#notes-modal").modal("hide");
     })
 })
 

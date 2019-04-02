@@ -105,6 +105,13 @@ router.post("/articles/:id", function(req, res) {
     });
 });
 
+router.delete("/notes/:id", function(req, res) {
+  db.Note.findOneAndDelete({_id: req.params.id})
+    .then(function(){
+      res.send("Deleted note " + req.params.id);
+    })
+});
+
 router.delete("/articles/:id", function(req, res) {
   db.Article.findOneAndDelete({_id: req.params.id})
     .then(function(deleted) {
